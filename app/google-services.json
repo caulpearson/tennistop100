@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "410743450777",
+    "firebase_url": "https://tennistop100-1dba4.firebaseio.com",
+    "project_id": "tennistop100-1dba4",
+    "storage_bucket": "tennistop100-1dba4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410743450777:android:0723c80a0577f254165c08",
+        "android_client_info": {
+          "package_name": "com.cloudy.tennistop100"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410743450777-nu7162po88od6jup4tacje7s1bjdflq9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cloudy.tennistop100",
+            "certificate_hash": "5432dd02b284ab13d1dc317a0094d6b2ab259e19"
+          }
+        },
+        {
+          "client_id": "410743450777-i9qafaobuue94s8jcsgaoejfmvafevbg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4j4vA-W4nv-JkVf3ZTMfDTc7ZqSzY2XE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410743450777-i9qafaobuue94s8jcsgaoejfmvafevbg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
