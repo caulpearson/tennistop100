@@ -33,6 +33,7 @@ public class PlayersListActivity extends AppCompatActivity {
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference mRef;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +41,13 @@ public class PlayersListActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
 
-        actionBar.setTitle("Tennis Top 100 (7 for now)");
+        actionBar.setTitle("Tennis Top 100 (30 for now)");
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         //send Query to FirebaseDatabase
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -80,6 +82,8 @@ public class PlayersListActivity extends AppCompatActivity {
                         String mImage = getItem(position).getImage();
                         String mMajors = getItem(position).getMajors();
                         String mTitles = getItem(position).getTitles();
+                        String mYears = getItem(position).getYears();
+                        String mCountry = getItem(position).getNationality();
 
                         //Pass this data to new activity
                         Intent intent = new Intent(view.getContext(), PlayerDetailActivity.class);
@@ -88,6 +92,8 @@ public class PlayersListActivity extends AppCompatActivity {
                         intent.putExtra("image", mImage);
                         intent.putExtra("majors", mMajors);
                         intent.putExtra("titles", mTitles);
+                        intent.putExtra("years", mYears);
+                        intent.putExtra("country", mCountry);
 
                         startActivity(intent);
                     }
@@ -111,7 +117,7 @@ public class PlayersListActivity extends AppCompatActivity {
                 new FirebaseRecyclerAdapter<Model, ViewHolder>(Model.class, R.layout.row, ViewHolder.class,mRef) {
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, Model model, int i) {
-                        viewHolder.setDetails(getApplicationContext(), model.getTitle(), model.getDescription(),model.getImage());
+                        viewHolder.setDetails(getApplicationContext(),Integer.toString(i+1)+": "+model.getTitle() , model.getDescription(),model.getImage());
                     }
                     @Override
                     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -125,6 +131,8 @@ public class PlayersListActivity extends AppCompatActivity {
                                 String mImage = getItem(position).getImage();
                                 String mMajors = getItem(position).getMajors();
                                 String mTitles = getItem(position).getTitles();
+                                String mYears = getItem(position).getYears();
+                                String mCountry = getItem(position).getNationality();
 
                                 //Pass this data to new activity
                                 Intent intent = new Intent(view.getContext(), PlayerDetailActivity.class);
@@ -133,6 +141,8 @@ public class PlayersListActivity extends AppCompatActivity {
                                 intent.putExtra("image", mImage);
                                 intent.putExtra("majors", mMajors);
                                 intent.putExtra("titles", mTitles);
+                                intent.putExtra("years", mYears);
+                                intent.putExtra("country", mCountry);
 
                                 startActivity(intent);
                             }
@@ -157,6 +167,8 @@ public class PlayersListActivity extends AppCompatActivity {
         //inflate menu to add items to action bar
         getMenuInflater().inflate(R.menu.menu, menu);
         MenuItem item = menu.findItem(R.id.action_search);
+        MenuItem settings = menu.findItem(R.id.action_settings);
+        settings.setTitle("About");
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -184,6 +196,8 @@ public class PlayersListActivity extends AppCompatActivity {
         //Hhandle other action bar item clicks
         if(id == R.id.action_settings){
             //TODO
+            Intent intent = new Intent(this, AboutActivity.class);
+            this.startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -3,7 +3,7 @@ package com.cloudy.tennistop100;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 public class Model {
-    String title, image, description, majors, titles;
+    String title, image, description, majors, titles, nationality, years;
 
     public Model(){}
 
@@ -45,5 +45,21 @@ public class Model {
 
     public void setTitles(String titles) {
         this.titles = titles;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getYears() {
+        return years;
+    }
+
+    public void setYears(String years) {
+        this.years = years;
     }
 }

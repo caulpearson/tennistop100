@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutActivity">
+
+    <TextView
+        android:id="@+id/descriptionTv"
+        android:text="This app is intended to show stats and allow comparisons of the 100 greatest players in the history of
+professional tennis. Currently there are 30 players in the app, with the next 70 players on the way in the next few updates.
+To use the app, scroll through the players, click on one to show stats, and click compare to compare with another players
+stats. The app uses Firebase to store photos and the text data about the players."
+        android:textSize="22sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

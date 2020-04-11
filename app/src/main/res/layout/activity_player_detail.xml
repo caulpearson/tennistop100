@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -34,30 +38,117 @@
         <TextView
             android:id="@+id/descriptionTv"
             android:text="Description of player"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/majorsTv"
             android:text="Major Tournaments Won: "
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_marginTop="5sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/titlesTv"
             android:text="Singles Titles Won: "
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/yearsTv"
             android:text="Years Active: "
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/countryTv"
+            android:text="Country: "
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
 
 
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/compareButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Compare Player"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:cardBackgroundColor="#fff"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="1dp"
+        app:contentPadding="2dp"
+        app:cardUseCompatPadding="true"
+        android:id="@+id/cardView2"
+        tools:context=".PlayerDetailActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/titleTv2"
+                android:text="Title"
+                android:textColor="#000"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!--        Loading icon?-->
+<!--            <TextView-->
+<!--                android:id="@+id/descriptionTv2"-->
+<!--                android:text="Description of player"-->
+<!--                android:textSize="20sp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
+            <TextView
+                android:id="@+id/majorsTv2"
+                android:text="Major Tournaments Won: "
+                android:textSize="18sp"
+                android:layout_marginTop="2sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/titlesTv2"
+                android:text="Singles Titles Won: "
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/yearsTv2"
+                android:text="Years Active: "
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/countryTv2"
+                android:text="Country: "
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
