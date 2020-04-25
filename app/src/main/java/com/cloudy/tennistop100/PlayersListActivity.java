@@ -41,7 +41,7 @@ public class PlayersListActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
 
-        actionBar.setTitle("Tennis Top 100 (30 for now)");
+        actionBar.setTitle("Tennis Top 100 (60 for now)");
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -57,6 +57,7 @@ public class PlayersListActivity extends AppCompatActivity {
     //Search data
     private void firebaseSearch(String searchText){
         Query firebaseSearchQuery = mRef.orderByChild("title").startAt(searchText).endAt(searchText + '\uf8ff');
+
 
         FirebaseRecyclerAdapter<Model, ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(
                 Model.class,
@@ -108,6 +109,72 @@ public class PlayersListActivity extends AppCompatActivity {
         };
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
+
+
+    //Search data
+    private void firebaseSort(int n){
+        Query firebaseSearchQuery = mRef.orderByChild("majors");
+
+
+        FirebaseRecyclerAdapter<Model, ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(
+                Model.class,
+                R.layout.row,
+                ViewHolder.class,
+                firebaseSearchQuery
+        ){
+
+            @Override
+            protected void populateViewHolder(ViewHolder viewHolder, Model model, int i) {
+                viewHolder.setDetails(getApplicationContext(), model.getTitle(), model.getDescription(),model.getImage());
+            }
+
+            @Override
+            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
+                viewHolder.setOnClickListener(new ViewHolder.ClickListener(){
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        //Getting data from firebase at pos clicked
+                        String mTitle = getItem(position).getTitle();
+                        String mDesc = getItem(position).getDescription();
+                        String mImage = getItem(position).getImage();
+                        String mMajors = getItem(position).getMajors();
+                        String mTitles = getItem(position).getTitles();
+                        String mYears = getItem(position).getYears();
+                        String mCountry = getItem(position).getNationality();
+
+                        //Pass this data to new activity
+                        Intent intent = new Intent(view.getContext(), PlayerDetailActivity.class);
+                        intent.putExtra("title", mTitle);
+                        intent.putExtra("description", mDesc);
+                        intent.putExtra("image", mImage);
+                        intent.putExtra("majors", mMajors);
+                        intent.putExtra("titles", mTitles);
+                        intent.putExtra("years", mYears);
+                        intent.putExtra("country", mCountry);
+
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+                        //Something else maybe
+                    }
+                });
+                return viewHolder;
+            }
+        };
+        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
+
+
+    @Override
+    public void onOptionsMenuClosed(Menu menu) {
+        super.onOptionsMenuClosed(menu);
+        onStart();
+    }
+
+
 
     //Load data into recycler view
     @Override
@@ -168,8 +235,13 @@ public class PlayersListActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         MenuItem item = menu.findItem(R.id.action_search);
         MenuItem settings = menu.findItem(R.id.action_settings);
+        MenuItem majors = menu.findItem(R.id.action_majors);
+        MenuItem reset = menu.findItem(R.id.action_reset);
         settings.setTitle("About");
+        majors.setTitle("Majors");
+        reset.setTitle("Reset");
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setQueryHint("Capitals Required");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -193,12 +265,18 @@ public class PlayersListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //Hhandle other action bar item clicks
-        if(id == R.id.action_settings){
+        //Handle other action bar item clicks
+        if(id == R.id.action_settings) {
             //TODO
             Intent intent = new Intent(this, AboutActivity.class);
             this.startActivity(intent);
             return true;
+        }
+        if(id == R.id.action_majors){
+            firebaseSort(1);
+        }
+        if(id == R.id.action_reset){
+            onStart();
         }
         return super.onOptionsItemSelected(item);
 
